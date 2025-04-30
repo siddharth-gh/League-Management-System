@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Standing; // ✅ Add this line
+use App\Models\Standing;
 use App\Models\Team;
 
 class StandingController extends Controller

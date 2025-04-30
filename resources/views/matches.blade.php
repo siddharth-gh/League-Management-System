@@ -11,12 +11,10 @@
             @foreach ($matches as $match)
                 <div class="bg-white shadow-md rounded-lg overflow-hidden p-6">
                     <div class="flex items-center justify-between mb-4">
-                        <!-- Team 1 Logo -->
                         <img src="{{ asset('storage/' . $match->team1->logo ?? 'default.png') }}"
                              alt="{{ $match->team1->name }} logo"
                              class="h-32 w-60 object-contain rounded-full" />
 
-                        <!-- Team 2 Logo -->
                         <img src="{{ asset('storage/versus.png') }}"  class="h-16 w-16 object-contain"/>
                         <img src="{{ asset('storage/' . $match->team2->logo ?? 'default.png') }}"
                              alt="{{ $match->team2->name }} logo"

@@ -8,13 +8,11 @@ use App\Models\Matches;
 
 class AdminController extends Controller
 {
-    // Show the admin login form
     public function admin()
     {
         return view('admin.verify');
     }
 
-    // Verify the admin ID and password
     public function verifyAdmin(Request $request)
     {
         $request->validate([
@@ -22,7 +20,6 @@ class AdminController extends Controller
             'admin_pass' => 'required',
         ]);
 
-        // Hardcoded credentials (you can move this to config/env if needed)
         $validId = 'siddharth';
         $validPass = '6440214405';
 
@@ -33,15 +30,11 @@ class AdminController extends Controller
 
         return redirect()->route('admin.unauthorized');
     }
-
-    // Dashboard only if admin
     public function dashboard()
     {
         if (session('role') === 'admin') { {
-                // Fetch upcoming matches where result is null
                 $upcomingMatches = Matches::whereNull('result')->get();
 
-                // Pass the data to the view
                 return view('admin.dashboard', compact('upcomingMatches'));
             }
             return view('admin.dashboard');
@@ -49,14 +42,11 @@ class AdminController extends Controller
 
         return redirect()->route('admin.unauthorized');
     }
-
-    // Unauthorized access view
     public function unauthorized()
     {
         return view('admin.unauthorized');
     }
 
-    // Logout the admin and clear the session
     public function logout()
     {
         session()->forget('role');

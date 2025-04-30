@@ -21,30 +21,24 @@ class MatchesController extends Controller
 
     public function declareResult($id, Request $request)
     {
-        // Validate the result input
         $request->validate([
             'result' => 'required|in:team1,team2,draw',
         ]);
 
-        // Find the match by ID
         $match = Matches::findOrFail($id);
 
-        // Prevent updating already declared result
         if ($match->result !== null) {
             return redirect()->back()->with('error', 'Result already declared.');
         }
 
         $result = $request->input('result');
 
-        // Save result to the match
         $match->result = $result;
         $match->save();
 
-        // Get team IDs
         $team1Id = $match->team1_id;
         $team2Id = $match->team2_id;
 
-        // Update standings based on result
         if ($result === 'team1') {
             $this->updateTeamStanding($team1Id, true);
             $this->updateTeamStanding($team2Id, false);
